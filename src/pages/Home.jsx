@@ -2,11 +2,14 @@ import { useState } from "react";
 import Button from "../components/Button";
 import InputField from "../components/InputField";
 import TextArea from "../components/TextArea";
+import Rating from "../components/Rating";
 
 function Home() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [review, setReview] = useState("");
+  const [rating, setRating] = useState(0);
+
   return (
     <div>
       <h1>Customer Feedback</h1>
@@ -23,6 +26,10 @@ function Home() {
         placeholder="Enter your email"
         value={email}
         onChange={(e) => setEmail(e.target.value)}
+      />
+      <Rating
+         rating={rating}
+        setRating={setRating}
       />
 
       <TextArea
