@@ -1,5 +1,6 @@
 function TextArea({
   label,
+  name,
   placeholder,
   value,
   onChange,
@@ -10,6 +11,7 @@ function TextArea({
       <label>{label}</label>
       <br />
       <textarea
+        name={name}
         placeholder={placeholder}
         value={value}
         onChange={onChange}
