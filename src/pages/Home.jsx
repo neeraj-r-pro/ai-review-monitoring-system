@@ -3,6 +3,7 @@ import Button from "../components/Button";
 import InputField from "../components/InputField";
 import TextArea from "../components/TextArea";
 import Rating from "../components/Rating";
+import { submitReview } from "../services/reviewService";
 
 function Home() {
   const [formData, setFormData] = useState({
@@ -32,7 +33,7 @@ function Home() {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (
@@ -53,14 +54,30 @@ function Home() {
       type: "success",
     });
 
-    console.log(formData);
+    try {
+      const response = await submitReview(formData);
 
-    setFormData({
-      name: "",
-      email: "",
-      review: "",
-      rating: 0,
-    });
+      setMessage({
+        text: response.message,
+        type: "success",
+      });
+
+      console.log(response);
+
+      setFormData({
+        name: "",
+        email: "",
+        review: "",
+        rating: 0,
+      });
+    } catch (error) {
+      setMessage({
+        text: "Something went wrong!",
+        type: "error",
+      });
+
+      console.error(error);
+    }
   };
 
   return (
