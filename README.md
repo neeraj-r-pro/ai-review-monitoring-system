@@ -1,16 +1,241 @@
-# React + Vite
+# 🤖 AI Review Monitoring System
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+An end-to-end AI-powered review monitoring system that allows customers to submit reviews while automatically analyzing their sentiment using a Transformer-based NLP model.
 
-Currently, two official plugins are available:
+The application is built with a modern full-stack architecture using **React**, **Flask**, **PostgreSQL**, and **Hugging Face Transformers**.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+---
 
-## React Compiler
+# 🚀 Features
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+### Customer Module
 
-## Expanding the ESLint configuration
+- Submit customer reviews
+- Star rating system
+- Form validation
+- Responsive React interface
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+### AI Module
+
+- Automatic sentiment analysis
+- RoBERTa Transformer model
+- Confidence score prediction
+- Hugging Face Transformers integration
+
+### Backend
+
+- REST API using Flask
+- SQLAlchemy ORM
+- Modular service architecture
+- Database migrations using Flask-Migrate
+
+### Database
+
+- PostgreSQL
+- Stores:
+  - Customer details
+  - Review
+  - Rating
+  - Sentiment
+  - Confidence Score
+  - Timestamp
+
+---
+
+# 🏗 System Architecture
+
+Customer
+
+↓
+
+React Frontend
+
+↓
+
+Flask REST API
+
+↓
+
+Review Service
+
+↓
+
+RoBERTa AI Model
+
+↓
+
+PostgreSQL Database
+
+---
+
+# 🛠 Tech Stack
+
+## Frontend
+
+- React
+- Vite
+- JavaScript
+- CSS
+- Axios
+- React Router
+
+## Backend
+
+- Python
+- Flask
+- SQLAlchemy
+- Flask-Migrate
+
+## Database
+
+- PostgreSQL
+
+## AI
+
+- Hugging Face Transformers
+- RoBERTa
+- PyTorch
+
+## Version Control
+
+- Git
+- GitHub
+
+---
+
+# 📁 Project Structure
+
+```
+AI-Review-Monitoring-System
+│
+├── backend
+│   ├── app
+│   │   ├── services
+│   │   ├── models.py
+│   │   ├── routes.py
+│   │   └── extensions.py
+│   │
+│   ├── migrations
+│   ├── requirements.txt
+│   └── run.py
+│
+├── frontend
+│   ├── src
+│   │   ├── components
+│   │   ├── pages
+│   │   ├── routes
+│   │   └── services
+│   │
+│   ├── package.json
+│   └── vite.config.js
+│
+└── README.md
+```
+
+---
+
+# ⚙ Installation
+
+## Clone the repository
+
+```bash
+git clone https://github.com/neeraj-r-pro/ai-review-monitoring-system.git
+```
+
+---
+
+## Backend
+
+```bash
+cd backend
+
+python -m venv venv
+
+venv\Scripts\activate
+
+pip install -r requirements.txt
+
+python run.py
+```
+
+---
+
+## Frontend
+
+```bash
+cd frontend
+
+npm install
+
+npm run dev
+```
+
+---
+
+# 🤖 AI Workflow
+
+```
+Customer Review
+
+↓
+
+Tokenizer
+
+↓
+
+RoBERTa Model
+
+↓
+
+Softmax
+
+↓
+
+Sentiment Prediction
+
+↓
+
+Confidence Score
+
+↓
+
+Store in PostgreSQL
+```
+
+---
+
+# 📊 Current Features
+
+- ✅ Customer Review Form
+- ✅ React Components
+- ✅ Flask REST API
+- ✅ PostgreSQL Integration
+- ✅ SQLAlchemy ORM
+- ✅ Flask-Migrate
+- ✅ AI Sentiment Prediction
+- ✅ Confidence Score
+- ✅ End-to-End Integration
+
+---
+
+# 🚧 Upcoming Features
+
+- 📊 Admin Dashboard
+- 📈 Review Analytics
+- 📉 Charts
+- 📧 Email Notifications
+- 🔍 Search & Filters
+- 🐳 Docker Support
+- ☁ Deployment
+
+---
+
+# 👨‍💻 Author
+
+**Neeraj R**
+
+GitHub:
+https://github.com/neeraj-r-pro
+
+LinkedIn:
+https://www.linkedin.com/in/neeraj-rajeev-905083255/
