@@ -5,6 +5,7 @@ from ..models import Review
 
 
 def get_dashboard_data():
+    # Overall statistics
     total_reviews = Review.query.count()
 
     positive_reviews = Review.query.filter_by(
@@ -23,6 +24,7 @@ def get_dashboard_data():
         db.session.query(func.avg(Review.rating)).scalar() or 0
     )
 
+    # Recent reviews
     recent_reviews = (
         Review.query
         .order_by(Review.created_at.desc())
@@ -42,6 +44,43 @@ def get_dashboard_data():
             }
         )
 
+    # Rating distribution
+    ratings = (
+        db.session.query(
+            Review.rating,
+            func.count(Review.id)
+        )
+        .group_by(Review.rating)
+        .order_by(Review.rating)
+        .all()
+    )
+
+    rating_distribution = []
+
+    for rating, count in ratings:
+        rating_distribution.append(
+            {
+                "rating": rating,
+                "count": count,
+            }
+        )
+
+    # Sentiment distribution
+    sentiment_distribution = [
+        {
+            "name": "Positive",
+            "value": positive_reviews,
+        },
+        {
+            "name": "Neutral",
+            "value": neutral_reviews,
+        },
+        {
+            "name": "Negative",
+            "value": negative_reviews,
+        },
+    ]
+
     return {
         "total_reviews": total_reviews,
         "positive_reviews": positive_reviews,
@@ -49,4 +88,6 @@ def get_dashboard_data():
         "negative_reviews": negative_reviews,
         "average_rating": round(float(average_rating), 1),
         "recent_reviews": reviews,
+        "rating_distribution": rating_distribution,
+        "sentiment_distribution": sentiment_distribution,
     }

@@ -1,3 +1,5 @@
+import { useEffect, useState } from "react";
+import axios from "axios";
 import {
   MessageSquare,
   Smile,
@@ -7,57 +9,15 @@ import {
   BarChart3,
   LineChart,
 } from "lucide-react";
+
 import Sidebar from "../components/Sidebar";
 import Topbar from "../components/Topbar";
 import StatCard from "../components/StatCard";
+
 import "./Dashboard.css";
 
-const STATS = [
-  {
-    icon: MessageSquare,
-    label: "Total Reviews",
-    value: "12,480",
-    trendText: "+8.1% vs last week",
-    trendDirection: "up",
-  },
-  {
-    icon: Smile,
-    label: "Positive Reviews",
-    value: "9,102",
-    trendText: "+5.4% vs last week",
-    trendDirection: "up",
-  },
-  {
-    icon: Meh,
-    label: "Neutral Reviews",
-    value: "2,014",
-    trendText: "-1.2% vs last week",
-    trendDirection: "down",
-  },
-  {
-    icon: Frown,
-    label: "Negative Reviews",
-    value: "1,364",
-    trendText: "-3.6% vs last week",
-    trendDirection: "down",
-  },
-  {
-    icon: Star,
-    label: "Average Rating",
-    value: "4.6",
-    trendText: "No change vs last week",
-    trendDirection: "neutral",
-  },
-];
-
-const RECENT_REVIEWS = [
-  { customer: "Ava Thompson", rating: 5, sentiment: "Positive", date: "Aug 1, 2026" },
-  { customer: "Daniel Kim", rating: 3, sentiment: "Neutral", date: "Aug 1, 2026" },
-  { customer: "Priya Nair", rating: 2, sentiment: "Negative", date: "Jul 31, 2026" },
-  { customer: "Marcus Lee", rating: 5, sentiment: "Positive", date: "Jul 31, 2026" },
-  { customer: "Sofia Ramirez", rating: 4, sentiment: "Positive", date: "Jul 30, 2026" },
-  { customer: "James Carter", rating: 1, sentiment: "Negative", date: "Jul 30, 2026" },
-];
+import SentimentPieChart from "../components/charts/SentimentPieChart";
+import RatingBarChart from "../components/charts/RatingBarChart";
 
 const SENTIMENT_BADGE_CLASS = {
   Positive: "badge--positive",
@@ -66,6 +26,71 @@ const SENTIMENT_BADGE_CLASS = {
 };
 
 function Dashboard() {
+  const [dashboardData, setDashboardData] = useState({
+    total_reviews: 0,
+    positive_reviews: 0,
+    neutral_reviews: 0,
+    negative_reviews: 0,
+    average_rating: 0,
+    recent_reviews: [],
+    rating_distribution: [],
+    sentiment_distribution: [],
+  });
+
+  useEffect(() => {
+    const fetchDashboard = async () => {
+      try {
+        const response = await axios.get(
+          "http://127.0.0.1:5000/api/dashboard"
+        );
+
+        setDashboardData(response.data);
+      } catch (error) {
+        console.error("Dashboard Error:", error);
+      }
+    };
+
+    fetchDashboard();
+  }, []);
+
+  const STATS = [
+    {
+      icon: MessageSquare,
+      label: "Total Reviews",
+      value: dashboardData.total_reviews,
+      trendText: "Updated just now",
+      trendDirection: "neutral",
+    },
+    {
+      icon: Smile,
+      label: "Positive Reviews",
+      value: dashboardData.positive_reviews,
+      trendText: "Updated just now",
+      trendDirection: "neutral",
+    },
+    {
+      icon: Meh,
+      label: "Neutral Reviews",
+      value: dashboardData.neutral_reviews,
+      trendText: "Updated just now",
+      trendDirection: "neutral",
+    },
+    {
+      icon: Frown,
+      label: "Negative Reviews",
+      value: dashboardData.negative_reviews,
+      trendText: "Updated just now",
+      trendDirection: "neutral",
+    },
+    {
+      icon: Star,
+      label: "Average Rating",
+      value: dashboardData.average_rating,
+      trendText: "Updated just now",
+      trendDirection: "neutral",
+    },
+  ];
+
   return (
     <div className="dashboard-layout">
       <Sidebar />
@@ -83,28 +108,41 @@ function Dashboard() {
           <section className="dashboard-charts" aria-label="Analytics">
             <div className="chart-card">
               <div className="chart-card__header">
-                <h2 className="chart-card__title">Sentiment trend</h2>
-                <span className="chart-card__period">Last 30 days</span>
+                <h2 className="chart-card__title">
+                  Sentiment Distribution
+                </h2>
+
+                <span className="chart-card__period">
+                  Live Data
+                </span>
               </div>
-              <div className="chart-card__placeholder">
-                <LineChart size={28} strokeWidth={1.5} />
-                <p>Chart will appear here</p>
-              </div>
+
+              <SentimentPieChart
+                data={dashboardData.sentiment_distribution}
+              />
             </div>
 
             <div className="chart-card">
               <div className="chart-card__header">
-                <h2 className="chart-card__title">Review volume</h2>
-                <span className="chart-card__period">Last 30 days</span>
+                <h2 className="chart-card__title">
+                  Rating Distribution
+                </h2>
+
+                <span className="chart-card__period">
+                  Live Data
+                </span>
               </div>
-              <div className="chart-card__placeholder">
-                <BarChart3 size={28} strokeWidth={1.5} />
-                <p>Chart will appear here</p>
-              </div>
+
+              <RatingBarChart
+                data={dashboardData.rating_distribution}
+              />
             </div>
           </section>
 
-          <section className="dashboard-table-section" aria-label="Recent reviews">
+          <section
+            className="dashboard-table-section"
+            aria-label="Recent reviews"
+          >
             <div className="table-card">
               <div className="table-card__header">
                 <h2 className="table-card__title">Recent Reviews</h2>
@@ -114,29 +152,40 @@ function Dashboard() {
                 <table className="reviews-table">
                   <thead>
                     <tr>
-                      <th scope="col">Customer</th>
-                      <th scope="col">Rating</th>
-                      <th scope="col">Sentiment</th>
-                      <th scope="col">Date</th>
+                      <th>Customer</th>
+                      <th>Rating</th>
+                      <th>Sentiment</th>
+                      <th>Date</th>
                     </tr>
                   </thead>
+
                   <tbody>
-                    {RECENT_REVIEWS.map((row) => (
-                      <tr key={`${row.customer}-${row.date}`}>
-                        <td>{row.customer}</td>
+                    {dashboardData.recent_reviews.map((row, index) => (
+                      <tr key={index}>
+                        <td>{row.name}</td>
+
                         <td>
-                          <span className="rating-stars" aria-label={`${row.rating} out of 5 stars`}>
+                          <span
+                            className="rating-stars"
+                            aria-label={`${row.rating} out of 5 stars`}
+                          >
                             {"★".repeat(row.rating)}
                             <span className="rating-stars__muted">
                               {"★".repeat(5 - row.rating)}
                             </span>
                           </span>
                         </td>
+
                         <td>
-                          <span className={`badge ${SENTIMENT_BADGE_CLASS[row.sentiment]}`}>
+                          <span
+                            className={`badge ${
+                              SENTIMENT_BADGE_CLASS[row.sentiment]
+                            }`}
+                          >
                             {row.sentiment}
                           </span>
                         </td>
+
                         <td className="reviews-table__date">{row.date}</td>
                       </tr>
                     ))}
