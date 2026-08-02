@@ -1,3 +1,6 @@
+import { MessageSquare } from "lucide-react";
+import "./TextArea.css";
+
 function TextArea({
   label,
   name,
@@ -7,16 +10,24 @@ function TextArea({
   rows = 5,
 }) {
   return (
-    <div>
-      <label>{label}</label>
-      <br />
-      <textarea
-        name={name}
-        placeholder={placeholder}
-        value={value}
-        onChange={onChange}
-        rows={rows}
-      />
+    <div className="form-group">
+      <label className="form-label" htmlFor={name}>
+        {label}
+      </label>
+
+      <div className="textarea-wrapper">
+        <MessageSquare size={18} className="textarea-icon" />
+
+        <textarea
+          id={name}
+          className="form-textarea"
+          name={name}
+          placeholder={placeholder}
+          value={value}
+          onChange={onChange}
+          rows={rows}
+        />
+      </div>
     </div>
   );
 }

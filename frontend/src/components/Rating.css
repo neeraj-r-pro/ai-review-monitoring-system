@@ -1,0 +1,26 @@
+.rating-container {
+  display: flex;
+  gap: 8px;
+  margin: 10px 0;
+}
+
+.rating-star {
+  font-size: 32px;
+  color: #d1d5db;
+  cursor: pointer;
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.rating-star:hover {
+  transform: scale(1.15);
+  color: #fbbf24;
+}
+
+.rating-star-active {
+  color: #f59e0b;
+}
+
+.rating-text {
+  color: var(--text-secondary);
+  font-size: 14px;
+}

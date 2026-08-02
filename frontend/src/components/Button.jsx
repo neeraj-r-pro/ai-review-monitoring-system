@@ -1,6 +1,18 @@
-function Button({ text, type = "button", onClick }) {
+import "./Button.css";
+
+function Button({
+  text,
+  type = "button",
+  onClick,
+  disabled = false,
+}) {
   return (
-    <button type={type} onClick={onClick}>
+    <button
+      className="primary-button"
+      type={type}
+      onClick={onClick}
+      disabled={disabled}
+    >
       {text}
     </button>
   );

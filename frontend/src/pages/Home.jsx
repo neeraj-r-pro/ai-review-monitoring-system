@@ -4,6 +4,7 @@ import InputField from "../components/InputField";
 import TextArea from "../components/TextArea";
 import Rating from "../components/Rating";
 import { submitReview } from "../services/reviewService";
+import "./Home.css";
 
 function Home() {
   const [formData, setFormData] = useState({
@@ -83,74 +84,74 @@ function Home() {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <h1>Customer Feedback</h1>
+    <div className="home-page">
+      <div className="review-card">
+        <form onSubmit={handleSubmit} className="review-form">
+          <div className="review-card__header">
+            <h1 className="review-card__heading">We Value Your Feedback</h1>
+            <p className="review-card__subtext">
+              We appreciate every review. Your feedback helps us improve our products, services, and overall customer experience.
+            </p>
+          </div>
 
-      {message.text && (
-        <p
-          style={{
-            padding: "10px",
-            borderRadius: "5px",
-            marginBottom: "15px",
-            backgroundColor:
-              message.type === "success" ? "#d4edda" : "#f8d7da",
-            color:
-              message.type === "success" ? "#155724" : "#721c24",
-            border:
-              message.type === "success"
-                ? "1px solid #c3e6cb"
-                : "1px solid #f5c6cb",
-          }}
-        >
-          {message.text}
-        </p>
-      )}
+          {message.text && (
+            <div
+              className={`alert ${
+                message.type === "success" ? "alert--success" : "alert--error"
+              }`}
+              role={message.type === "error" ? "alert" : "status"}
+            >
+              {message.text}
+            </div>
+          )}
 
-      <InputField
-        label="Name"
-        name="name"
-        placeholder="Enter your name"
-        value={formData.name}
-        onChange={handleChange}
-      />
+          <InputField
+            label="Name"
+            name="name"
+            placeholder="Enter your name"
+            value={formData.name}
+            onChange={handleChange}
+          />
 
-      <InputField
-        label="Email"
-        name="email"
-        type="email"
-        placeholder="Enter your email"
-        value={formData.email}
-        onChange={handleChange}
-      />
+          <InputField
+            label="Email"
+            name="email"
+            type="email"
+            placeholder="Enter your email"
+            value={formData.email}
+            onChange={handleChange}
+          />
 
-      <Rating
-        rating={formData.rating}
-        setRating={(value) => {
-          setMessage({
-            text: "",
-            type: "",
-          });
+          <Rating
+            rating={formData.rating}
+            setRating={(value) => {
+              setMessage({
+                text: "",
+                type: "",
+              });
 
-          setFormData({
-            ...formData,
-            rating: value,
-          });
-        }}
-      />
+              setFormData({
+                ...formData,
+                rating: value,
+              });
+            }}
+          />
 
-      <TextArea
-        label="Review"
-        name="review"
-        placeholder="Write your review"
-        value={formData.review}
-        onChange={handleChange}
-      />
+          <TextArea
+            label="Review"
+            name="review"
+            placeholder="Write your review"
+            value={formData.review}
+            onChange={handleChange}
+          />
 
-      <Button
-        text="Submit Review"
-        type="submit"
-      />
-    </form>
+          <Button text="Submit Review" type="submit" />
+        </form>
+        <div className="review-footer">
+          Your information is kept private and is used only to improve our services.
+        </div>
+      </div>
+    </div>
   );
 }
 

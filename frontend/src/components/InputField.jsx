@@ -1,3 +1,6 @@
+import { User, Mail } from "lucide-react";
+import "./InputField.css";
+
 function InputField({
   label,
   type = "text",
@@ -6,17 +9,27 @@ function InputField({
   onChange,
   name,
 }) {
+  const Icon = type === "email" ? Mail : User;
+
   return (
-    <div>
-      <label>{label}</label>
-      <br />
-      <input
-        type={type}
-        name={name}
-        placeholder={placeholder}
-        value={value}
-        onChange={onChange}
-      />
+    <div className="form-group">
+      <label className="form-label" htmlFor={name}>
+        {label}
+      </label>
+
+      <div className="input-wrapper">
+        <Icon size={18} className="input-icon" />
+
+        <input
+          id={name}
+          className="form-input"
+          type={type}
+          name={name}
+          placeholder={placeholder}
+          value={value}
+          onChange={onChange}
+        />
+      </div>
     </div>
   );
 }

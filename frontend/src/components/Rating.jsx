@@ -1,19 +1,28 @@
 import { FaStar } from "react-icons/fa";
+import "./Rating.css";
 
 function Rating({ rating, setRating }) {
   return (
-    <div>
-      <label>Rating</label>
-      <br />
+    <div className="form-group">
+      <label className="form-label">Rating</label>
 
-      {[1, 2, 3, 4, 5].map((star) => (
-        <FaStar
-          key={star}
-          size={30}
-          color={star <= rating ? "gold" : "lightgray"}
-          style={{ cursor: "pointer", marginRight: "5px" }}
-          onClick={() => setRating(rating === star ? 0 : star)}        />
-      ))}
+      <div className="rating-container">
+        {[1, 2, 3, 4, 5].map((star) => (
+          <FaStar
+            key={star}
+            className={`rating-star ${
+              star <= rating ? "rating-star-active" : ""
+            }`}
+            onClick={() => setRating(rating === star ? 0 : star)}
+          />
+        ))}
+      </div>
+
+      <small className="rating-text">
+        {rating === 0
+          ? "Select a rating"
+          : `${rating} ${rating === 1 ? "Star" : "Stars"}`}
+      </small>
     </div>
   );
 }
