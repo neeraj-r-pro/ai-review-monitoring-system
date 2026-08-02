@@ -1,0 +1,218 @@
+.dashboard-layout {
+  display: flex;
+  min-height: 100vh;
+  background-color: #f8fafc;
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+.dashboard-main {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.dashboard-content {
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+/* ---------- Stats grid ---------- */
+
+.dashboard-stats {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 20px;
+}
+
+/* ---------- Chart placeholders ---------- */
+
+.dashboard-charts {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+}
+
+.chart-card {
+  background-color: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  box-shadow: 0 1px 2px rgba(17, 24, 39, 0.04), 0 8px 24px -12px rgba(17, 24, 39, 0.08);
+  padding: 20px 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.chart-card__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.chart-card__title {
+  font-size: 15px;
+  font-weight: 600;
+  color: #111827;
+  margin: 0;
+}
+
+.chart-card__period {
+  font-size: 12.5px;
+  color: #6b7280;
+}
+
+.chart-card__placeholder {
+  height: 220px;
+  border: 1px dashed #e5e7eb;
+  border-radius: 8px;
+  background-color: #f8fafc;
+  color: #9ca3af;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.chart-card__placeholder p {
+  margin: 0;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+/* ---------- Table card ---------- */
+
+.table-card {
+  background-color: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  box-shadow: 0 1px 2px rgba(17, 24, 39, 0.04), 0 8px 24px -12px rgba(17, 24, 39, 0.08);
+  overflow: hidden;
+}
+
+.table-card__header {
+  padding: 20px 22px;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.table-card__title {
+  font-size: 15px;
+  font-weight: 600;
+  color: #111827;
+  margin: 0;
+}
+
+.table-card__scroll {
+  overflow-x: auto;
+}
+
+.reviews-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+.reviews-table thead th {
+  text-align: left;
+  font-size: 12.5px;
+  font-weight: 600;
+  color: #6b7280;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  padding: 12px 22px;
+  border-bottom: 1px solid #e5e7eb;
+  white-space: nowrap;
+}
+
+.reviews-table tbody td {
+  padding: 14px 22px;
+  border-bottom: 1px solid #f1f2f4;
+  color: #111827;
+  white-space: nowrap;
+}
+
+.reviews-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.reviews-table__date {
+  color: #6b7280;
+}
+
+.rating-stars {
+  color: #2563eb;
+  letter-spacing: 1px;
+}
+
+.rating-stars__muted {
+  color: #e5e7eb;
+}
+
+/* ---------- Status badges ---------- */
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  font-size: 12.5px;
+  font-weight: 500;
+  padding: 4px 10px;
+  border-radius: 999px;
+  border: 1px solid transparent;
+}
+
+.badge--positive {
+  background-color: #ecfdf5;
+  color: #059669;
+  border-color: #a7f3d0;
+}
+
+.badge--neutral {
+  background-color: #fffbeb;
+  color: #b45309;
+  border-color: #fde68a;
+}
+
+.badge--negative {
+  background-color: #fef2f2;
+  color: #dc2626;
+  border-color: #fecaca;
+}
+
+/* ---------- Responsive ---------- */
+
+@media (max-width: 1200px) {
+  .dashboard-stats {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 1024px) {
+  .dashboard-charts {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .dashboard-stats {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .dashboard-content {
+    padding: 24px;
+  }
+}
+
+@media (max-width: 640px) {
+  .dashboard-stats {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .dashboard-content {
+    padding: 20px;
+    padding-bottom: 88px;
+    gap: 20px;
+  }
+}

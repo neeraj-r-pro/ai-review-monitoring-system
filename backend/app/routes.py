@@ -1,6 +1,7 @@
 from flask import Blueprint, jsonify, request
 
 from .services.review_service import process_review
+from .services.dashboard_service import get_dashboard_data
 
 main = Blueprint("main", __name__)
 
@@ -22,3 +23,8 @@ def submit_review():
     result = process_review(data)
 
     return jsonify(result)
+
+@main.route("/api/dashboard", methods=["GET"])
+def dashboard():
+    data = get_dashboard_data()
+    return jsonify(data)
