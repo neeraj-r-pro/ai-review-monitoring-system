@@ -1,0 +1,25 @@
+.summary-card {
+  background: white;
+  border-radius: 14px;
+  padding: 28px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, .05);
+}
+
+.summary-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+
+.summary-header h2 {
+  margin: 0;
+  font-size: 22px;
+}
+
+.summary-card p {
+  margin: 0;
+  line-height: 1.8;
+  color: #475569;
+  font-size: 16px;
+}

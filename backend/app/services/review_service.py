@@ -1,7 +1,7 @@
 from ..extensions import db
 from ..models import Review
 from .ai_service import predict_sentiment
-
+from ..utils.datetime_helper import format_datetime
 
 def process_review(data):
 
@@ -46,7 +46,7 @@ def get_all_reviews():
                 "rating": review.rating,
                 "sentiment": review.sentiment,
                 "confidence": round(review.confidence * 100, 2),
-                "created_at": review.created_at.strftime("%d %b %Y %I:%M %p"),
+                "created_at": format_datetime(review.created_at),
             }
         )
 

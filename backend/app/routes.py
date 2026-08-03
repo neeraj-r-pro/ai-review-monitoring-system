@@ -5,6 +5,7 @@ from .services.review_service import (
     get_all_reviews,
 )
 from .services.dashboard_service import get_dashboard_data
+from .services.insights_service import get_insights_data
 
 main = Blueprint("main", __name__)
 
@@ -36,3 +37,7 @@ def get_reviews():
 def dashboard():
     data = get_dashboard_data()
     return jsonify(data)
+
+@main.route("/api/insights", methods=["GET"])
+def insights():
+    return get_insights_data()
