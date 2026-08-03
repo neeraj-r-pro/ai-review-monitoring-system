@@ -3,7 +3,10 @@ from sqlalchemy import func
 from ..extensions import db
 from ..models import Review
 from .summary_service import generate_summary
-
+from .keyword_service import (
+    extract_positive_keywords,
+    extract_negative_keywords,
+)
 def get_insights_data():
 
     total_reviews = Review.query.count()
@@ -55,4 +58,7 @@ def get_insights_data():
         ),
         "reviews_analyzed": total_reviews,
         "summary": generate_summary(),
+
+        "positive_keywords": extract_positive_keywords(),
+        "negative_keywords": extract_negative_keywords(),
     }

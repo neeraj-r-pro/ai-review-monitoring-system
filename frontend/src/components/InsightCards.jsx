@@ -6,6 +6,7 @@ import {
 } from "lucide-react";
 
 import StatCard from "./StatCard";
+import KeywordCards from "./KeywordCards";
 
 function InsightCards({ insights }) {
   const cards = [
@@ -43,14 +44,21 @@ function InsightCards({ insights }) {
   ];
 
   return (
-    <section className="dashboard-stats">
-      {cards.map((card) => (
-        <StatCard
-          key={card.label}
-          {...card}
-        />
-      ))}
-    </section>
+    <>
+      <section className="dashboard-stats">
+        {cards.map((card) => (
+          <StatCard
+            key={card.label}
+            {...card}
+          />
+        ))}
+      </section>
+
+      <KeywordCards
+        positiveKeywords={insights.positive_keywords}
+        negativeKeywords={insights.negative_keywords}
+      />
+    </>
   );
 }
 

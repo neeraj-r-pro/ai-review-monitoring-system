@@ -15,6 +15,8 @@ function Insights() {
     most_common_rating: 0,
     reviews_analyzed: 0,
     summary: "",
+    positive_keywords: [],
+    negative_keywords: [],
   });
 
   useEffect(() => {
