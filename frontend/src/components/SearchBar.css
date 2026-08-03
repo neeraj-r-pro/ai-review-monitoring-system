@@ -1,0 +1,28 @@
+.search-bar{
+    position:relative;
+    margin-bottom:24px;
+}
+
+.search-bar input{
+    width:100%;
+    padding:14px 18px 14px 48px;
+    border:1px solid #e5e7eb;
+    border-radius:12px;
+    font-size:15px;
+    outline:none;
+    transition:.25s;
+    box-sizing:border-box;
+}
+
+.search-bar input:focus{
+    border-color:#2563eb;
+    box-shadow:0 0 0 4px rgba(37,99,235,.08);
+}
+
+.search-bar__icon{
+    position:absolute;
+    top:50%;
+    left:16px;
+    transform:translateY(-50%);
+    color:#64748b;
+}

@@ -1,0 +1,94 @@
+.review-card {
+    width: 100%;
+    background: #fff;
+    border-radius: 14px;
+    box-shadow: 0 2px 8px rgba(0,0,0,.05);
+    overflow-x: auto;
+}
+
+.review-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.review-table thead {
+    background: #f8fafc;
+}
+
+.review-table th {
+    text-align: left;
+    padding: 18px 24px;
+    font-size: 14px;
+    color: #64748b;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.review-table td {
+    padding: 18px 24px;
+    border-top: 1px solid #eef2f7;
+    white-space: nowrap;
+}
+
+.review-table tbody tr {
+    transition: 0.25s;
+}
+
+.review-table tbody tr:hover {
+    background: #f8fbff;
+}
+
+.rating {
+    color: #2563eb;
+    letter-spacing: 2px;
+}
+
+.rating-empty {
+    color: #d1d5db;
+}
+
+.badge {
+    padding: 6px 14px;
+    border-radius: 999px;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.badge-positive {
+    background: #dcfce7;
+    color: #16a34a;
+}
+
+.badge-neutral {
+    background: #fef3c7;
+    color: #d97706;
+}
+
+.badge-negative {
+    background: #fee2e2;
+    color: #dc2626;
+}
+
+.view-btn{
+    display:flex;
+    align-items:center;
+    gap:6px;
+
+    border:none;
+
+    background:#2563eb;
+
+    color:white;
+
+    padding:8px 14px;
+
+    border-radius:8px;
+
+    cursor:pointer;
+
+    transition:.25s;
+}
+
+.view-btn:hover{
+    background:#1d4ed8;
+}

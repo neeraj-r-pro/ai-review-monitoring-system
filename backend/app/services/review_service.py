@@ -25,3 +25,29 @@ def process_review(data):
         "sentiment": prediction["sentiment"],
         "confidence": prediction["confidence"]
     }
+
+
+def get_all_reviews():
+    reviews = (
+        Review.query
+        .order_by(Review.created_at.desc())
+        .all()
+    )
+
+    result = []
+
+    for review in reviews:
+        result.append(
+            {
+                "id": review.id,
+                "name": review.name,
+                "email": review.email,
+                "review": review.review,
+                "rating": review.rating,
+                "sentiment": review.sentiment,
+                "confidence": round(review.confidence * 100, 2),
+                "created_at": review.created_at.strftime("%d %b %Y %I:%M %p"),
+            }
+        )
+
+    return result

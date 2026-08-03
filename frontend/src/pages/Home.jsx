@@ -22,7 +22,6 @@ function Home() {
   const handleChange = (e) => {
     const { name, value } = e.target;
 
-    // Clear previous message whenever user starts typing
     setMessage({
       text: "",
       type: "",
@@ -37,6 +36,7 @@ function Home() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    // Check for empty fields
     if (
       !formData.name ||
       !formData.email ||
@@ -50,19 +50,25 @@ function Home() {
       return;
     }
 
-    setMessage({
-      text: "✅ Review submitted successfully!",
-      type: "success",
-    });
+    // Email validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    if (!emailRegex.test(formData.email)) {
+      setMessage({
+        text: "⚠ Please enter a valid email address.",
+        type: "error",
+      });
+      return;
+    }
 
     try {
       const response = await submitReview(formData);
 
       setMessage({
-          text: `${response.message} Sentiment: ${response.sentiment} (${(
-              response.confidence * 100
-          ).toFixed(2)}%)`,
-          type: "success",
+        text: `${response.message} Sentiment: ${
+          response.sentiment
+        } (${(response.confidence * 100).toFixed(2)}%)`,
+        type: "success",
       });
 
       console.log(response);
@@ -75,7 +81,7 @@ function Home() {
       });
     } catch (error) {
       setMessage({
-        text: "Something went wrong!",
+        text: "❌ Something went wrong! Please try again.",
         type: "error",
       });
 
@@ -88,16 +94,22 @@ function Home() {
       <div className="review-card">
         <form onSubmit={handleSubmit} className="review-form">
           <div className="review-card__header">
-            <h1 className="review-card__heading">We Value Your Feedback</h1>
+            <h1 className="review-card__heading">
+              We Value Your Feedback
+            </h1>
+
             <p className="review-card__subtext">
-              We appreciate every review. Your feedback helps us improve our products, services, and overall customer experience.
+              We appreciate every review. Your feedback helps us improve our
+              products, services, and overall customer experience.
             </p>
           </div>
 
           {message.text && (
             <div
               className={`alert ${
-                message.type === "success" ? "alert--success" : "alert--error"
+                message.type === "success"
+                  ? "alert--success"
+                  : "alert--error"
               }`}
               role={message.type === "error" ? "alert" : "status"}
             >
@@ -145,10 +157,15 @@ function Home() {
             onChange={handleChange}
           />
 
-          <Button text="Submit Review" type="submit" />
+          <Button
+            text="Submit Review"
+            type="submit"
+          />
         </form>
+
         <div className="review-footer">
-          Your information is kept private and is used only to improve our services.
+          Your information is kept private and is used only to improve our
+          services.
         </div>
       </div>
     </div>

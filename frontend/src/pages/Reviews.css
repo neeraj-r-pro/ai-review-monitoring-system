@@ -1,0 +1,39 @@
+.reviews-page {
+    width: 100%;
+    padding: 30px;
+    box-sizing: border-box;
+}
+
+.reviews-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.reviews-header h1 {
+    margin: 0;
+    font-size: 32px;
+}
+
+.reviews-header p {
+    margin-top: 8px;
+    color: #64748b;
+}
+
+.reviews-count {
+    background: white;
+    min-width: 130px;
+    padding: 18px 30px;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,.05);
+    text-align: center;
+}
+
+.reviews-count span {
+    display: block;
+    margin-top: 8px;
+    font-size: 30px;
+    font-weight: 700;
+    color: #2563eb;
+}
