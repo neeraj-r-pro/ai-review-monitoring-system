@@ -1,11 +1,11 @@
-from flask import Blueprint, jsonify, request
-
+from flask import Blueprint, jsonify, request, send_file
 from .services.review_service import (
     process_review,
     get_all_reviews,
 )
 from .services.dashboard_service import get_dashboard_data
 from .services.insights_service import get_insights_data
+from .services.report_service import generate_report
 
 main = Blueprint("main", __name__)
 
@@ -41,3 +41,15 @@ def dashboard():
 @main.route("/api/insights", methods=["GET"])
 def insights():
     return get_insights_data()
+
+@main.route("/api/reports", methods=["GET"])
+def reports():
+
+    pdf_path = generate_report()
+
+    return send_file(
+        pdf_path,
+        as_attachment=True,
+        download_name="AI_Review_Report.pdf",
+        mimetype="application/pdf",
+    )
