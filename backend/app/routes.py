@@ -1,4 +1,12 @@
-from flask import Blueprint, jsonify, request, send_file
+import os
+
+from flask import (
+    Blueprint,
+    jsonify,
+    request,
+    send_file,
+    abort,
+)
 
 from .services.review_service import (
     process_review,
@@ -7,6 +15,7 @@ from .services.review_service import (
 from .services.dashboard_service import get_dashboard_data
 from .services.insights_service import get_insights_data
 from .services.report_service import generate_report
+from .services.report_history_service import get_report_history
 
 main = Blueprint("main", __name__)
 
@@ -19,6 +28,10 @@ def home():
         }
     )
 
+
+# ---------------------------------------------------------
+# Reviews
+# ---------------------------------------------------------
 
 @main.route("/api/reviews", methods=["POST"])
 def submit_review():
@@ -38,6 +51,10 @@ def get_reviews():
     return jsonify(reviews)
 
 
+# ---------------------------------------------------------
+# Dashboard
+# ---------------------------------------------------------
+
 @main.route("/api/dashboard", methods=["GET"])
 def dashboard():
 
@@ -46,11 +63,19 @@ def dashboard():
     return jsonify(data)
 
 
+# ---------------------------------------------------------
+# Insights
+# ---------------------------------------------------------
+
 @main.route("/api/insights", methods=["GET"])
 def insights():
 
     return get_insights_data()
 
+
+# ---------------------------------------------------------
+# Generate Reports
+# ---------------------------------------------------------
 
 @main.route("/api/reports", methods=["GET"])
 def reports():
@@ -60,7 +85,19 @@ def reports():
         "pdf",
     )
 
-    file_path = generate_report(report_format)
+    start_date = request.args.get(
+        "start_date"
+    )
+
+    end_date = request.args.get(
+        "end_date"
+    )
+
+    file_path = generate_report(
+        report_format,
+        start_date,
+        end_date,
+    )
 
     if report_format == "excel":
 
@@ -76,4 +113,55 @@ def reports():
         as_attachment=True,
         download_name="AI_Review_Report.pdf",
         mimetype="application/pdf",
+    )
+
+
+# ---------------------------------------------------------
+# Report History
+# ---------------------------------------------------------
+
+@main.route("/api/report-history", methods=["GET"])
+def report_history():
+
+    history = get_report_history()
+
+    return jsonify(history)
+
+
+# ---------------------------------------------------------
+# Download Existing Report
+# ---------------------------------------------------------
+
+@main.route("/api/reports/download/<filename>", methods=["GET"])
+def download_report(filename):
+
+    BASE_DIR = os.path.abspath(
+        os.path.join(
+            os.path.dirname(__file__),
+            "..",
+        )
+    )
+
+    reports_folder = os.path.join(
+        BASE_DIR,
+        "reports",
+    )
+
+    file_path = os.path.join(
+        reports_folder,
+        filename,
+    )
+
+    print("DOWNLOAD ROUTE HIT")
+    print("BASE_DIR:", BASE_DIR)
+    print("REPORTS FOLDER:", reports_folder)
+    print("FILE PATH:", file_path)
+    print("EXISTS:", os.path.exists(file_path))
+
+    if not os.path.exists(file_path):
+        abort(404)
+
+    return send_file(
+        file_path,
+        as_attachment=True,
     )

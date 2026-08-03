@@ -1,7 +1,7 @@
 import { useState } from "react";
 import "./ReportGenerator.css";
 
-function ReportGenerator() {
+function ReportGenerator({ onReportGenerated }) {
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
   const [format, setFormat] = useState("pdf");
@@ -14,6 +14,13 @@ function ReportGenerator() {
       `&end_date=${endDate}`;
 
     window.open(url, "_blank");
+
+    // Refresh history after report generation
+    if (onReportGenerated) {
+      setTimeout(() => {
+        onReportGenerated();
+      }, 1000);
+    }
   };
 
   return (
@@ -31,9 +38,7 @@ function ReportGenerator() {
           <input
             type="date"
             value={startDate}
-            onChange={(e) =>
-              setStartDate(e.target.value)
-            }
+            onChange={(e) => setStartDate(e.target.value)}
           />
         </div>
 
@@ -43,9 +48,7 @@ function ReportGenerator() {
           <input
             type="date"
             value={endDate}
-            onChange={(e) =>
-              setEndDate(e.target.value)
-            }
+            onChange={(e) => setEndDate(e.target.value)}
           />
         </div>
 
@@ -54,9 +57,7 @@ function ReportGenerator() {
 
           <select
             value={format}
-            onChange={(e) =>
-              setFormat(e.target.value)
-            }
+            onChange={(e) => setFormat(e.target.value)}
           >
             <option value="pdf">PDF</option>
             <option value="excel">Excel</option>
