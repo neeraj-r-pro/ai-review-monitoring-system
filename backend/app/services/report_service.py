@@ -12,9 +12,9 @@ from .keyword_service import (
 )
 
 from ..utils.pdf_generator import generate_pdf
+from ..utils.excel_generator import generate_excel
 
-
-def generate_report():
+def generate_report(report_format="pdf"):
 
     reviews = Review.query.all()
 
@@ -65,10 +65,6 @@ def generate_report():
         "negative_keywords": extract_negative_keywords(),
     }
 
-    # ----------------------------------------------------
-    # Create reports folder inside backend/
-    # ----------------------------------------------------
-
     BASE_DIR = os.path.abspath(
         os.path.join(
             os.path.dirname(__file__),
@@ -87,16 +83,28 @@ def generate_report():
         exist_ok=True,
     )
 
-    pdf_path = os.path.join(
-        reports_folder,
-        "AI_Review_Report.pdf",
-    )
+    if report_format == "excel":
 
-    print("Saving PDF to:", pdf_path)
+        file_path = os.path.join(
+            reports_folder,
+            "AI_Review_Report.xlsx",
+        )
 
-    generate_pdf(
-        report_data,
-        pdf_path,
-    )
+        generate_excel(
+            report_data,
+            file_path,
+        )
 
-    return pdf_path
+    else:
+
+        file_path = os.path.join(
+            reports_folder,
+            "AI_Review_Report.pdf",
+        )
+
+        generate_pdf(
+            report_data,
+            file_path,
+        )
+
+    return file_path

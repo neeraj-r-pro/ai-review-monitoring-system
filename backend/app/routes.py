@@ -1,4 +1,5 @@
 from flask import Blueprint, jsonify, request, send_file
+
 from .services.review_service import (
     process_review,
     get_all_reviews,
@@ -28,27 +29,50 @@ def submit_review():
 
     return jsonify(result)
 
+
 @main.route("/api/reviews", methods=["GET"])
 def get_reviews():
+
     reviews = get_all_reviews()
+
     return jsonify(reviews)
+
 
 @main.route("/api/dashboard", methods=["GET"])
 def dashboard():
+
     data = get_dashboard_data()
+
     return jsonify(data)
+
 
 @main.route("/api/insights", methods=["GET"])
 def insights():
+
     return get_insights_data()
+
 
 @main.route("/api/reports", methods=["GET"])
 def reports():
 
-    pdf_path = generate_report()
+    report_format = request.args.get(
+        "format",
+        "pdf",
+    )
+
+    file_path = generate_report(report_format)
+
+    if report_format == "excel":
+
+        return send_file(
+            file_path,
+            as_attachment=True,
+            download_name="AI_Review_Report.xlsx",
+            mimetype="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+        )
 
     return send_file(
-        pdf_path,
+        file_path,
         as_attachment=True,
         download_name="AI_Review_Report.pdf",
         mimetype="application/pdf",
