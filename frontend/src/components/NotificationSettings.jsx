@@ -12,6 +12,8 @@ function NotificationSettings() {
     notify_neutral: false,
     notify_positive: false,
     minimum_confidence: 0.8,
+    daily_summary_enabled: true,
+    daily_summary_time: "20:00",
   });
 
   useEffect(() => {
@@ -38,42 +40,47 @@ function NotificationSettings() {
           ? checked
           : value,
     });
+
   };
 
   const saveSettings = async () => {
 
     if (
-        settings.notifications_enabled &&
-        !settings.notify_positive &&
-        !settings.notify_neutral &&
-        !settings.notify_negative
+      settings.notifications_enabled &&
+      !settings.notify_positive &&
+      !settings.notify_neutral &&
+      !settings.notify_negative
     ) {
-        alert(
-        "Please enable at least one review notification type."
-        );
 
-        return;
+      alert(
+        "Please enable at least one review notification type."
+      );
+
+      return;
+
     }
 
     try {
 
-        await axios.put(
+      await axios.put(
         "http://127.0.0.1:5000/api/settings",
         settings
-        );
+      );
 
-        alert("Settings saved successfully!");
-
-    } catch (error) {
-
-        alert(
-        error.response?.data?.message ||
-        "Failed to save settings."
-        );
+      alert("Settings saved successfully!");
 
     }
 
-    };
+    catch (error) {
+
+      alert(
+        error.response?.data?.message ||
+        "Failed to save settings."
+      );
+
+    }
+
+  };
 
   return (
 
@@ -170,9 +177,39 @@ function NotificationSettings() {
 
         </label>
 
+        <hr />
+
+        <h3>Daily Summary Report</h3>
+
+        <label>
+
+          <input
+            type="checkbox"
+            name="daily_summary_enabled"
+            checked={settings.daily_summary_enabled}
+            onChange={handleChange}
+          />
+
+          Enable Daily Summary Email
+
+        </label>
+
+        <label>
+
+          Daily Summary Time
+
+          <input
+            type="time"
+            name="daily_summary_time"
+            value={settings.daily_summary_time}
+            onChange={handleChange}
+          />
+
+        </label>
+
         <button
-          onClick={saveSettings}
           className="save-btn"
+          onClick={saveSettings}
         >
 
           Save Settings
@@ -184,6 +221,7 @@ function NotificationSettings() {
     </section>
 
   );
+
 }
 
 export default NotificationSettings;

@@ -11,7 +11,9 @@ def get_settings():
     settings = NotificationSettings.query.first()
 
     if settings is None:
+
         settings = NotificationSettings()
+
         db.session.add(settings)
         db.session.commit()
 
@@ -29,6 +31,8 @@ def get_settings_json():
         "notify_neutral": settings.notify_neutral,
         "notify_positive": settings.notify_positive,
         "minimum_confidence": settings.minimum_confidence,
+        "daily_summary_enabled": settings.daily_summary_enabled,
+        "daily_summary_time": settings.daily_summary_time,
     }
 
 
@@ -40,6 +44,7 @@ def update_settings(data):
         and not data["notify_neutral"]
         and not data["notify_negative"]
     ):
+
         return {
             "success": False,
             "message": (
@@ -57,9 +62,17 @@ def update_settings(data):
     settings.notify_positive = data["notify_positive"]
     settings.minimum_confidence = data["minimum_confidence"]
 
+    settings.daily_summary_enabled = data[
+        "daily_summary_enabled"
+    ]
+
+    settings.daily_summary_time = data[
+        "daily_summary_time"
+    ]
+
     db.session.commit()
 
     return {
         "success": True,
-        "message": "Settings updated successfully."
+        "message": "Settings updated successfully.",
     }

@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>ReviewIQ Business Intelligence Report</title>
+</head>
+
+<body style="margin:0;padding:30px;background:#eef2f7;font-family:Arial,Helvetica,sans-serif;">
+
+<table width="100%" cellpadding="0" cellspacing="0">
+
+<tr>
+
+<td align="center">
+
+<table width="760"
+cellpadding="0"
+cellspacing="0"
+style="background:white;border-radius:14px;overflow:hidden;box-shadow:0 10px 35px rgba(0,0,0,.12);">
+
+<!-- ================================================= -->
+<!-- Header -->
+<!-- ================================================= -->
+
+<tr>
+
+<td
+style="
+background:#2563eb;
+padding:40px;
+text-align:center;
+color:white;
+">
+
+<h1 style="margin:0;font-size:40px;">
+ReviewIQ
+</h1>
+
+<p style="margin-top:10px;font-size:18px;">
+Daily Business Intelligence Report
+</p>
+
+</td>
+
+</tr>
+
+<!-- ================================================= -->
+<!-- Date -->
+<!-- ================================================= -->
+
+<tr>
+
+<td
+style="
+background:#f8fafc;
+padding:20px;
+text-align:center;
+font-size:18px;
+font-weight:bold;
+">
+
+📅 {{ report.today.date }}
+
+</td>
+
+</tr>
+
+<!-- ================================================= -->
+<!-- Statistics -->
+<!-- ================================================= -->
+
+<tr>
+
+<td style="padding:35px;">
+
+<table width="100%" cellpadding="12">
+
+<tr>
+
+<td align="center"
+style="background:#eff6ff;border-radius:10px;">
+
+<h2>{{ report.today.total_reviews }}</h2>
+
+Total Reviews
+
+</td>
+
+<td></td>
+
+<td align="center"
+style="background:#ecfdf5;border-radius:10px;">
+
+<h2 style="color:#16a34a;">
+{{ report.today.positive }}
+</h2>
+
+Positive
+
+</td>
+
+</tr>
+
+<tr>
+
+<td colspan="3" height="10"></td>
+
+</tr>
+
+<tr>
+
+<td align="center"
+style="background:#fefce8;border-radius:10px;">
+
+<h2 style="color:#ca8a04;">
+{{ report.today.neutral }}
+</h2>
+
+Neutral
+
+</td>
+
+<td></td>
+
+<td align="center"
+style="background:#fef2f2;border-radius:10px;">
+
+<h2 style="color:#dc2626;">
+{{ report.today.negative }}
+</h2>
+
+Negative
+
+</td>
+
+</tr>
+
+</table>
+
+</td>
+
+</tr>
+
+<!-- ================================================= -->
+<!-- Metrics -->
+<!-- ================================================= -->
+
+<tr>
+
+<td style="padding:0 35px 30px 35px;">
+
+<h2>Business Metrics</h2>
+
+<table width="100%" cellpadding="10">
+
+<tr>
+
+<td><b>⭐ Average Rating</b></td>
+
+<td>{{ report.today.average_rating }}/5</td>
+
+</tr>
+
+<tr>
+
+<td><b>🎯 AI Confidence</b></td>
+
+<td>{{ report.today.average_confidence }}%</td>
+
+</tr>
+
+<tr>
+
+<td><b>😊 Customer Satisfaction</b></td>
+
+<td>{{ report.today.customer_satisfaction }}%</td>
+
+</tr>
+
+</table>
+
+</td>
+
+</tr>
+
+<!-- ================================================= -->
+<!-- Trend -->
+<!-- ================================================= -->
+
+<tr>
+
+<td style="padding:0 35px 35px 35px;">
+
+<h2>📈 Trend vs Yesterday</h2>
+
+<table width="100%" cellpadding="10">
+
+<tr>
+
+<td>Total Reviews</td>
+
+<td>{{ report.trend.total_reviews }}%</td>
+
+</tr>
+
+<tr>
+
+<td>Positive Reviews</td>
+
+<td>{{ report.trend.positive }}%</td>
+
+</tr>
+
+<tr>
+
+<td>Negative Reviews</td>
+
+<td>{{ report.trend.negative }}%</td>
+
+</tr>
+
+<tr>
+
+<td>Average Rating</td>
+
+<td>{{ report.trend.average_rating }}%</td>
+
+</tr>
+
+</table>
+
+</td>
+
+</tr>
+
+<!-- ================================================= -->
+<!-- Keywords -->
+<!-- ================================================= -->
+
+<tr>
+
+<td style="padding:0 35px 35px 35px;">
+
+<h2>🔥 Top Positive Keywords</h2>
+
+<p>
+
+{% for word in report.today.top_positive_keywords %}
+
+<span
+style="
+display:inline-block;
+padding:8px 14px;
+margin:5px;
+background:#dcfce7;
+border-radius:20px;
+">
+
+{{ word }}
+
+</span>
+
+{% endfor %}
+
+</p>
+
+<h2>🚨 Top Negative Keywords</h2>
+
+<p>
+
+{% for word in report.today.top_negative_keywords %}
+
+<span
+style="
+display:inline-block;
+padding:8px 14px;
+margin:5px;
+background:#fee2e2;
+border-radius:20px;
+">
+
+{{ word }}
+
+</span>
+
+{% endfor %}
+
+</p>
+
+</td>
+
+</tr>
+
+<!-- ================================================= -->
+<!-- Best Review -->
+<!-- ================================================= -->
+
+{% if report.today.highest_review %}
+
+<tr>
+
+<td style="padding:0 35px 30px 35px;">
+
+<h2>🏆 Highest Rated Review</h2>
+
+<div
+style="
+background:#ecfdf5;
+padding:20px;
+border-left:6px solid #16a34a;
+border-radius:8px;
+">
+
+{{ report.today.highest_review.review }}
+
+</div>
+
+</td>
+
+</tr>
+
+{% endif %}
+
+<!-- ================================================= -->
+<!-- Worst Review -->
+<!-- ================================================= -->
+
+{% if report.today.lowest_review %}
+
+<tr>
+
+<td style="padding:0 35px 30px 35px;">
+
+<h2>⚠ Lowest Rated Review</h2>
+
+<div
+style="
+background:#fef2f2;
+padding:20px;
+border-left:6px solid #dc2626;
+border-radius:8px;
+">
+
+{{ report.today.lowest_review.review }}
+
+</div>
+
+</td>
+
+</tr>
+
+{% endif %}
+
+<!-- ================================================= -->
+<!-- AI Summary -->
+<!-- ================================================= -->
+
+<tr>
+
+<td style="padding:0 35px 35px 35px;">
+
+<h2>🤖 AI Executive Summary</h2>
+
+<div
+style="
+background:#f8fafc;
+padding:25px;
+border-left:6px solid #2563eb;
+border-radius:8px;
+line-height:1.8;
+">
+
+{{ report.business_summary }}
+
+</div>
+
+</td>
+
+</tr>
+
+<!-- ================================================= -->
+<!-- Footer -->
+<!-- ================================================= -->
+
+<tr>
+
+<td
+style="
+background:#f3f4f6;
+padding:25px;
+text-align:center;
+font-size:14px;
+color:#6b7280;
+">
+
+Generated automatically by
+
+<b>ReviewIQ AI Review Monitoring Platform</b>
+
+<br><br>
+
+© {{ year }} ReviewIQ
+
+</td>
+
+</tr>
+
+</table>
+
+</td>
+
+</tr>
+
+</table>
+
+</body>
+
+</html>

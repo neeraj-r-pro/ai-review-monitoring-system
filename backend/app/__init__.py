@@ -4,6 +4,7 @@ from flask_migrate import Migrate
 
 from config import Config
 from .extensions import db, mail
+from .scheduler import start_scheduler
 
 
 def create_app():
@@ -23,5 +24,8 @@ def create_app():
     from .routes import main
 
     app.register_blueprint(main)
+
+    with app.app_context():
+        start_scheduler(app)
 
     return app

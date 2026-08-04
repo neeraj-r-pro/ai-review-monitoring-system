@@ -70,6 +70,18 @@ class NotificationSettings(db.Model):
         nullable=False,
     )
 
+    daily_summary_enabled = db.Column(
+        db.Boolean,
+        default=True,
+        nullable=False,
+    )
+
+    daily_summary_time = db.Column(
+        db.String(5),
+        default="20:00",
+        nullable=False,
+    )
+
     created_at = db.Column(
         db.DateTime,
         default=datetime.utcnow,
