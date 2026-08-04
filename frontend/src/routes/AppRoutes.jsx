@@ -8,6 +8,7 @@ import Reviews from "../pages/Reviews";
 import NotFound from "../pages/NotFound";
 import Insights from "../pages/Insights";
 import Reports from "../pages/Reports";
+import Settings from "../pages/Settings";
 
 function AppRoutes() {
   return (
@@ -19,8 +20,9 @@ function AppRoutes() {
         <Route path="/analytics" element={<Analytics />} />
         <Route path="/reviews" element={<Reviews />} />
         <Route path="/insights" element={<Insights />} />
-        <Route path="*" element={<NotFound />} />
         <Route path="/reports" element={<Reports />} />
+        <Route path="/settings" element={<Settings />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>
   );

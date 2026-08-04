@@ -16,6 +16,10 @@ from .services.dashboard_service import get_dashboard_data
 from .services.insights_service import get_insights_data
 from .services.report_service import generate_report
 from .services.report_history_service import get_report_history
+from .services.settings_service import (
+    get_settings_json,
+    update_settings,
+)
 
 main = Blueprint("main", __name__)
 
@@ -127,6 +131,29 @@ def report_history():
 
     return jsonify(history)
 
+# ---------------------------------------------------------
+# Notification Settings
+# ---------------------------------------------------------
+
+@main.route("/api/settings", methods=["GET"])
+def settings():
+
+    return jsonify(
+        get_settings_json()
+    )
+
+
+@main.route("/api/settings", methods=["PUT"])
+def save_settings():
+
+    data = request.get_json()
+
+    result = update_settings(data)
+
+    if not result["success"]:
+        return jsonify(result), 400
+
+    return jsonify(result)
 
 # ---------------------------------------------------------
 # Download Existing Report

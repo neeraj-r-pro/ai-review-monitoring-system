@@ -1,0 +1,68 @@
+.notification-settings {
+  background: #ffffff;
+  padding: 30px;
+  border-radius: 14px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+  margin-top: 25px;
+}
+
+.notification-settings h2 {
+  margin-bottom: 25px;
+  color: #1f2937;
+}
+
+.settings-form {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+.settings-form label {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-weight: 600;
+    color: #374151;
+}
+
+.settings-form input[type="email"] {
+  padding: 12px 15px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  font-size: 15px;
+  outline: none;
+}
+
+.settings-form input[type="email"]:focus {
+  border-color: #2563eb;
+}
+
+.settings-form input[type="checkbox"] {
+  margin-right: 10px;
+}
+
+.settings-form input[type="range"] {
+  width: 100%;
+}
+
+.settings-form span {
+  color: #2563eb;
+  font-weight: bold;
+}
+
+.save-btn {
+  margin-top: 15px;
+  background: #2563eb;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 14px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.save-btn:hover {
+  background: #1d4ed8;
+}
