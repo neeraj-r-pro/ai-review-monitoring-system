@@ -1,44 +1,46 @@
-# 🤖 AI-Powered Review Monitoring System
+# 🤖 ReviewIQ – AI-Powered Review Monitoring System
 
-An end-to-end AI-powered customer review monitoring platform built using **React**, **Flask**, **PostgreSQL**, and **Hugging Face Transformers**. The system allows customers to submit reviews while automatically analyzing their sentiment using a Transformer-based NLP model (RoBERTa) and storing the results in a PostgreSQL database.
+<p align="center">
 
 ![Python](https://img.shields.io/badge/Python-3.11-blue?logo=python)
-![React](https://img.shields.io/badge/React-19-61DAFB?logo=react)
 ![Flask](https://img.shields.io/badge/Flask-3.1-black?logo=flask)
-![PostgreSQL](https://img.shields.io/badge/PostgreSQL-18-336791?logo=postgresql)
+![React](https://img.shields.io/badge/React-18-61DAFB?logo=react)
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-16-336791?logo=postgresql)
+![Hugging Face](https://img.shields.io/badge/Hugging%20Face-Transformers-yellow?logo=huggingface)
+![spaCy](https://img.shields.io/badge/spaCy-NLP-09A3D5?logo=spacy)
+![Git](https://img.shields.io/badge/Git-Version%20Control-F05032?logo=git)
 ![License](https://img.shields.io/badge/License-MIT-green)
-![Status](https://img.shields.io/badge/Status-Active%20Development-success)
-![AI](https://img.shields.io/badge/AI-RoBERTa-orange)
-![Transformers](https://img.shields.io/badge/Hugging%20Face-Transformers-yellow?logo=huggingface)
 
+</p>
 
-![Stars](https://img.shields.io/github/stars/neeraj-r-pro/ai-review-monitoring-system?style=social)
-![Forks](https://img.shields.io/github/forks/neeraj-r-pro/ai-review-monitoring-system?style=social)
-![Last Commit](https://img.shields.io/github/last-commit/neeraj-r-pro/ai-review-monitoring-system)
-![Repo Size](https://img.shields.io/github/repo-size/neeraj-r-pro/ai-review-monitoring-system)
-![Top Language](https://img.shields.io/github/languages/top/neeraj-r-pro/ai-review-monitoring-system)
+<p align="center">
+  AI-powered customer review analysis, business intelligence, automated reporting, and email monitoring platform.
+</p>
+
+The system allows businesses to collect customer reviews, automatically analyze sentiment using a Transformer-based NLP model, extract keywords, monitor review trends, generate business intelligence reports, send email notifications, and receive scheduled daily summary reports.
+
 ---
 
 ## 🚀 Project Status
 
-🟢 **Active Development**
+🟢 **Completed**
 
-### Completed
-- ✅ Customer Review Module
-- ✅ AI Sentiment Analysis
-- ✅ PostgreSQL Integration
-- ✅ REST API
-- ✅ Database Migrations
+ReviewIQ is a complete full-stack AI application with:
 
-### Currently Working On
-- 🔄 Professional UI Redesign
-
-### Upcoming
-- ⏳ Admin Dashboard
-- ⏳ Review Analytics
-- ⏳ Email Notifications
-- ⏳ Docker Support
-- ⏳ Cloud Deployment
+- Customer review submission
+- AI-powered sentiment analysis
+- Confidence scoring
+- PostgreSQL database integration
+- Business intelligence dashboard
+- Sentiment and review analytics
+- Keyword extraction
+- Automated email notifications
+- Scheduled daily business intelligence summaries
+- PDF report generation
+- Excel report generation
+- Report history
+- REST API
+- Database migrations
 
 ---
 
@@ -48,13 +50,18 @@ An end-to-end AI-powered customer review monitoring platform built using **React
 - [Features](#-features)
 - [Tech Stack](#-tech-stack)
 - [System Architecture](#-system-architecture)
+- [AI Workflow](#-ai-workflow)
+- [Business Intelligence](#-business-intelligence)
+- [Email Automation](#-email-automation)
+- [Report Generation](#-report-generation)
+- [Database](#-database)
 - [Project Structure](#-project-structure)
 - [Installation](#-installation)
-- [API Endpoints](#-api-endpoints)
-- [AI Workflow](#-ai-workflow)
-- [Database Schema](#-database-schema)
+- [Running the Application](#-running-the-application)
+- [API](#-api)
 - [Screenshots](#-screenshots)
-- [Future Roadmap](#-future-roadmap)
+- [Project Highlights](#-project-highlights)
+- [Future Improvements](#-future-improvements)
 - [Author](#-author)
 - [License](#-license)
 
@@ -62,57 +69,177 @@ An end-to-end AI-powered customer review monitoring platform built using **React
 
 # 📖 Overview
 
-Customer reviews contain valuable insights for businesses.
+Customer reviews contain valuable information about customer satisfaction and business performance.
 
-This project automatically analyzes customer reviews using an AI-powered sentiment analysis model and stores the prediction results in a PostgreSQL database.
+ReviewIQ automatically processes customer reviews using AI and converts raw review data into useful business insights.
 
-Instead of manually reading hundreds of reviews, companies can quickly understand customer satisfaction using AI.
+The platform analyzes each review using a Transformer-based sentiment analysis model and stores the results along with the original review data.
+
+The collected data is then used to provide:
+
+- Sentiment analytics
+- Review trends
+- Keyword insights
+- Business intelligence
+- Automated notifications
+- Daily summary reports
+- Downloadable PDF and Excel reports
+
+This allows businesses to monitor customer feedback without manually analyzing large numbers of reviews.
 
 ---
 
 # ✨ Features
 
-## 👤 Customer Module
+## 👤 Customer Review Module
 
 - Submit customer reviews
+- Customer name and email
 - Star rating system
-- Form validation
-- Responsive React interface
+- Review validation
+- Automatic AI analysis after submission
 - Instant feedback after submission
 
 ---
 
-## 🤖 AI Module
+## 🤖 AI Sentiment Analysis
 
-- Automatic sentiment prediction
+ReviewIQ uses a Transformer-based NLP model to automatically classify customer reviews.
+
+### Capabilities
+
+- Sentiment classification
+- Positive / Neutral / Negative prediction
+- Confidence score
+- Transformer-based inference
+
+### Model
+
+**CardiffNLP Twitter-RoBERTa sentiment model**
+
+Powered through:
+
 - Hugging Face Transformers
-- RoBERTa sentiment classification
-- Confidence score prediction
-- Fast inference
+- PyTorch
 
 ---
 
-## ⚙ Backend
+## 📊 Business Intelligence Dashboard
 
-- Flask REST API
-- SQLAlchemy ORM
-- Modular Service Layer
-- Flask-Migrate
-- Clean architecture
+The dashboard provides an overview of customer feedback and business performance.
+
+### Dashboard insights include:
+
+- Total reviews
+- Average rating
+- Sentiment distribution
+- Sentiment trends
+- AI confidence
+- Review statistics
+- Customer satisfaction insights
+- Positive and negative review information
 
 ---
 
-## 🗄 Database
+## 🔑 Keyword Extraction
 
-Stores:
+ReviewIQ extracts important keywords from customer reviews to help identify recurring topics and customer concerns.
 
-- Customer Name
-- Email
-- Review
-- Rating
-- Sentiment
-- Confidence Score
-- Timestamp
+**KeyBERT** is used for keyword extraction.
+
+The system also uses **spaCy** for NLP processing.
+
+---
+
+## 📈 Review Analytics
+
+The system analyzes collected reviews to identify:
+
+- Positive sentiment trends
+- Negative sentiment trends
+- Rating patterns
+- Customer satisfaction
+- Review volume
+- Important review topics
+
+---
+
+# 📧 Email Automation
+
+ReviewIQ includes automated email functionality using **Flask-Mail**.
+
+### Email capabilities
+
+- Automated review notifications
+- Configurable email settings
+- Company email configuration
+- Sentiment-based notifications
+- HTML email templates
+
+The application can send business intelligence information directly through email.
+
+---
+
+# ⏰ Scheduled Daily Summary
+
+ReviewIQ includes an automated daily business intelligence summary system using **APScheduler**.
+
+The scheduled job:
+
+1. Retrieves the configured settings
+2. Generates the latest business intelligence report
+3. Checks the day's review activity
+4. Creates an HTML email
+5. Sends the summary to the configured company email
+
+The scheduled time can be configured through the application settings.
+
+The scheduler uses the **Asia/Kolkata** timezone.
+
+---
+
+# 📄 Report Generation
+
+ReviewIQ can generate downloadable business intelligence reports.
+
+## PDF Reports
+
+**ReportLab** is used to generate PDF reports containing business and review analytics.
+
+## Excel Reports
+
+**OpenPyXL** is used to generate Excel reports containing review and analytical data.
+
+### Report capabilities
+
+- PDF report generation
+- Excel report generation
+- Business intelligence summaries
+- Review statistics
+- Sentiment information
+- Report history
+- Downloadable reports
+
+---
+
+# 🗄 Database
+
+ReviewIQ uses **PostgreSQL** as the primary relational database.
+
+**SQLAlchemy** is used as the ORM and **Alembic / Flask-Migrate** is used for database migrations.
+
+### Review data includes:
+
+| Column | Description |
+|---|---|
+| `id` | Unique review ID |
+| `name` | Customer name |
+| `email` | Customer email |
+| `review` | Customer review |
+| `rating` | Customer rating |
+| `sentiment` | AI-predicted sentiment |
+| `confidence` | AI prediction confidence |
+| `created_at` | Review creation timestamp |
 
 ---
 
@@ -120,315 +247,117 @@ Stores:
 
 ## Frontend
 
-- React
-- Vite
-- JavaScript
-- CSS
-- Axios
-- React Router
+- **React.js**
+- **Vite**
+- **JavaScript**
+- **HTML**
+- **CSS**
+- **Axios**
+- **React Router**
 
 ---
 
 ## Backend
 
-- Python
-- Flask
-- SQLAlchemy
-- Flask-Migrate
+- **Python**
+- **Flask**
+- **SQLAlchemy**
+- **Flask-Migrate**
+- **Alembic**
+- **Flask-CORS**
+- **REST API**
 
 ---
 
 ## Database
 
-- PostgreSQL
+- **PostgreSQL**
+- **psycopg2-binary**
 
 ---
 
-## AI
+## AI / NLP
 
-- Hugging Face Transformers
-- CardiffNLP RoBERTa
-- PyTorch
+- **Hugging Face Transformers**
+- **CardiffNLP RoBERTa**
+- **PyTorch**
+- **spaCy**
+- **KeyBERT**
+- **scikit-learn**
+- **Sentence Transformers**
 
 ---
 
-## Version Control
+## Automation & Email
 
-- Git
-- GitHub
+- **APScheduler**
+- **Flask-Mail**
+
+---
+
+## Reporting
+
+- **ReportLab**
+- **OpenPyXL**
+
+---
+
+## Development & Version Control
+
+- **Python Virtual Environment**
+- **python-dotenv**
+- **Git**
+- **GitHub**
 
 ---
 
 # 🏗 System Architecture
 
-```
-                 Customer
-                     │
-                     ▼
-          React Frontend (Vite)
-                     │
-                 Axios API
-                     │
-                     ▼
-             Flask REST API
-                     │
-          ┌──────────┴──────────┐
-          ▼                     ▼
-   Review Service         AI Service
-          │                     │
-          └──────────┬──────────┘
-                     ▼
-               PostgreSQL
-```
-
----
-
-# 📂 Project Structure
-
 ```text
-AI-Review-Monitoring-System
-│
-├── backend
-│   ├── app
-│   │   ├── services
-│   │   │   ├── ai_service.py
-│   │   │   └── review_service.py
-│   │   │
-│   │   ├── models.py
-│   │   ├── routes.py
-│   │   ├── extensions.py
-│   │   └── __init__.py
-│   │
-│   ├── migrations
-│   ├── requirements.txt
-│   └── run.py
-│
-├── frontend
-│   ├── src
-│   │   ├── components
-│   │   ├── pages
-│   │   ├── layouts
-│   │   ├── routes
-│   │   └── services
-│   │
-│   ├── public
-│   ├── package.json
-│   └── vite.config.js
-│
-└── README.md
-```
-
----
-
-# ⚙ Installation
-
-## Clone Repository
-
-```bash
-git clone https://github.com/neeraj-r-pro/ai-review-monitoring-system.git
-
-cd ai-review-monitoring-system
-```
-
----
-
-## Backend Setup
-
-```bash
-cd backend
-
-python -m venv venv
-
-venv\Scripts\activate
-
-pip install -r requirements.txt
-
-python run.py
-```
-
----
-
-## Frontend Setup
-
-```bash
-cd frontend
-
-npm install
-
-npm run dev
-```
-
----
-
-# 🔗 API Endpoints
-
-| Method | Endpoint | Description |
-|---------|----------|-------------|
-| GET | `/` | Backend Health Check |
-| POST | `/api/reviews` | Submit Customer Review |
-
----
-
-# 🤖 AI Workflow
-
-```
-Customer Review
-
-        │
-
-        ▼
-
-Tokenizer
-
-        │
-
-        ▼
-
-RoBERTa Transformer
-
-        │
-
-        ▼
-
-Softmax
-
-        │
-
-        ▼
-
-Sentiment Prediction
-
-        │
-
-        ▼
-
-Confidence Score
-
-        │
-
-        ▼
-
-Store in PostgreSQL
-```
-
----
-
-# 🗄 Database Schema
-
-| Column | Type |
-|---------|------|
-| id | Integer |
-| name | String |
-| email | String |
-| review | Text |
-| rating | Integer |
-| sentiment | String |
-| confidence | Float |
-| created_at | DateTime |
-
----
-
-# 📊 Current Features
-
-- ✅ Customer Review Form
-- ✅ React Components
-- ✅ React Router
-- ✅ Form Validation
-- ✅ Flask REST API
-- ✅ PostgreSQL Integration
-- ✅ SQLAlchemy ORM
-- ✅ Flask-Migrate
-- ✅ AI Sentiment Prediction
-- ✅ Confidence Score
-- ✅ End-to-End Integration
-
----
-
-# 📸 Screenshots
-
-## Customer Review Page
-
-> Coming Soon
-
----
-
-## Admin Dashboard
-
-> Under Development
-
----
-
-# 🚀 Future Roadmap
-
-## Phase 2
-
-- Professional UI
-- Admin Dashboard
-- Review Table
-
----
-
-## Phase 3
-
-- Analytics Dashboard
-- Charts
-- Search
-- Filters
-
----
-
-## Phase 4
-
-- Email Notifications
-- Weekly Reports
-
----
-
-## Phase 5
-
-- Docker
-- Docker Compose
-- Cloud Deployment
-
----
-
-# 📊 Project Highlights
-
-- Full Stack AI Application
-- Transformer-based NLP
-- REST API Architecture
-- PostgreSQL Database
-- AI Sentiment Analysis
-- Modular Service Layer
-- Reusable React Components
-
----
-
-# 🙏 Acknowledgements
-
-- Hugging Face
-- CardiffNLP
-- React
-- Flask
-- PostgreSQL
-- SQLAlchemy
-
----
-
-# 👨‍💻 Author
-
-**Neeraj R**
-
-GitHub
-
-https://github.com/neeraj-r-pro
-
-LinkedIn
-
-https://www.linkedin.com/in/neeraj-rajeev-905083255/
-
----
-
-# 📄 License
-
-This project is licensed under the MIT License.
+                         Customer
+                            │
+                            ▼
+                  ┌───────────────────┐
+                  │   React Frontend  │
+                  │       + Vite      │
+                  └─────────┬─────────┘
+                            │
+                         Axios
+                            │
+                            ▼
+                  ┌───────────────────┐
+                  │    Flask REST API │
+                  └─────────┬─────────┘
+                            │
+              ┌─────────────┼─────────────┐
+              │             │             │
+              ▼             ▼             ▼
+       Review Service   AI Service   BI Services
+              │             │             │
+              │             ▼             │
+              │     Hugging Face          │
+              │       RoBERTa             │
+              │             │             │
+              └─────────────┼─────────────┘
+                            │
+                            ▼
+                     PostgreSQL
+                            │
+              ┌─────────────┼─────────────┐
+              │             │             │
+              ▼             ▼             ▼
+          Dashboard     Reports      Email System
+                            │             │
+                    ┌───────┴───────┐     │
+                    ▼               ▼     ▼
+                 ReportLab       OpenPyXL
+                    │               │
+                    ▼               ▼
+                   PDF            Excel
+
+                            │
+                            ▼
+                       APScheduler
+                            │
+                            ▼
+                  Daily BI Summary Email
