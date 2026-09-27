@@ -1,5 +1,5 @@
 import os
-
+from .scheduler import schedule_daily_summary
 from flask import (
     Blueprint,
     jsonify,
@@ -152,6 +152,11 @@ def save_settings():
 
     if not result["success"]:
         return jsonify(result), 400
+
+    # Refresh scheduler with the newly saved settings
+    from flask import current_app
+
+    schedule_daily_summary(current_app._get_current_object())
 
     return jsonify(result)
 
